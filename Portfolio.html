@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daksh Singh | Portfolio</title>
+  <style>
+    /* Reset & Fonts */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: #f9fafc;
+      color: #333;
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+    body.dark { background: #1a1a1a; color: #f1f1f1; }
+
+    /* Navbar */
+    nav {
+      position: fixed; width: 100%; background: #ffffffee;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 3rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      z-index: 1000; transition: background 0.4s;
+    }
+    body.dark nav { background: #222222ee; }
+    nav .logo { font-size: 1.5rem; font-weight: 700; color: #4a47a3; cursor: pointer; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { text-decoration: none; color: inherit; font-weight: 500; transition: color 0.3s; }
+    nav ul li a:hover { color: #4a47a3; }
+
+    /* Dark Mode Button */
+    .toggle-btn { cursor: pointer; font-size: 1.2rem; margin-left: 1rem; background: none; border: none; color: inherit; transition: transform 0.3s; }
+    .toggle-btn:hover { transform: rotate(20deg); }
+
+    /* Hero */
+    header {
+      height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;
+      padding: 0 2rem;
+      background: linear-gradient(135deg, #e2e2ff, #ffffff);
+      transition: background 0.4s;
+    }
+    body.dark header { background: linear-gradient(135deg, #2a2a3b, #1a1a1a); }
+    header h1 { font-size: 3rem; color: #4a47a3; animation: fadeInDown 1s ease forwards; }
+    body.dark header h1 { color: #9b97ff; }
+
+    header .typing { font-size: 1.2rem; margin-top: 1rem; height: 1.5rem; overflow: hidden; border-right: 2px solid #4a47a3; white-space: nowrap; animation: blink 0.8s infinite; }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    header img.hero-img { margin-top: 2rem; width: 250px; border-radius: 50%; box-shadow: 0 8px 25px rgba(0,0,0,0.1); animation: float 3s ease-in-out infinite; }
+
+    header button {
+      margin-top: 2rem; padding: 0.8rem 2rem; border: none; border-radius: 50px; background: #4a47a3; color: white;
+      font-size: 1rem; cursor: pointer; transition: transform 0.3s, background 0.3s;
+    }
+    header button:hover { transform: scale(1.05); background: #6b67d2; }
+
+    /* Sections */
+    section { padding: 5rem 2rem; max-width: 1100px; margin: auto; opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    section.show { opacity: 1; transform: translateY(0); }
+    section h2 { font-size: 2rem; color: #4a47a3; margin-bottom: 2rem; text-align: center; position: relative; }
+    body.dark section h2 { color: #9b97ff; }
+    section h2::after { content: ''; display: block; width: 50px; height: 4px; background: #4a47a3; margin: 0.5rem auto; border-radius: 2px; }
+    body.dark section h2::after { background: #9b97ff; }
+
+    /* About */
+    .about { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; }
+    .about img { width: 300px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    .about-text { flex: 1; }
+    .about-text p { line-height: 1.6; }
+
+    /* Projects */
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .project-card { background: white; border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); overflow: hidden; transition: transform 0.3s; }
+    body.dark .project-card { background: #2a2a2a; }
+    .project-card:hover { transform: translateY(-5px) rotate(-1deg); }
+    .project-card img { width: 100%; height: 180px; object-fit: cover; }
+    .project-card .content { padding: 1rem; }
+    .project-card h3 { margin-bottom: 0.5rem; }
+
+    /* Contact */
+    .contact { text-align: center; }
+    .contact a { display: inline-block; margin: 0.5rem; padding: 0.8rem 1.5rem; border-radius: 50px; background: #4a47a3; color: white; text-decoration: none; transition: background 0.3s, transform 0.3s; }
+    .contact a:hover { background: #6b67d2; transform: scale(1.05); }
+
+    /* Footer */
+    footer { text-align: center; padding: 2rem; background: #f1f2f7; font-size: 0.9rem; color: #555; transition: background 0.4s; }
+    body.dark footer { background: #111; color: #aaa; }
+
+    /* Animations */
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      nav ul { position: fixed; top: 0; right: -100%; height: 100vh; width: 200px; background: #fff; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; transition: right 0.3s ease; }
+      body.dark nav ul { background: #222; }
+      nav ul.active { right: 0; }
+      .menu-toggle { display: block; cursor: pointer; font-size: 1.5rem; }
+    }
+    .menu-toggle { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Daksh Singh</div>
+    <div class="menu-toggle">☰</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="toggle-btn">🌙</button>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home">
+    <h1>Hi, I'm Daksh Singh 👋</h1>
+    <div class="typing"></div>
+    <img class="hero-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80" alt="Laptop">
+    <button onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Let’s Connect</button>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80" alt="Coding Desk">
+      <div class="about-text">
+        <p>
+          I’m a Computer Science student at Symbiosis Institute of Technology 🎓, passionate about coding, AI, and building impactful solutions.  
+          Beyond my studies, I love experimenting with SaaS ideas, gaming setups, and side projects that blend creativity with technology.  
+          My dream? To launch innovative apps and carve my way as both an engineer and entrepreneur 🚀.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1581090700227-4c4e1d3a5066?auto=format&fit=crop&w=800&q=80" alt="CS50">
+        <div class="content">
+          <h3>CS50 Projects</h3>
+          <p>Hands-on apps & algorithms developed during Harvard’s CS50 courses 📚.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1614851099510-9431c3e4a9ab?auto=format&fit=crop&w=800&q=80" alt="YouTube">
+        <div class="content">
+          <h3>Faceless AI YouTube Channel</h3>
+          <p>AI-powered history shorts 🎥 reaching global audiences in a unique way.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1607083207963-e9690a3e6b9c?auto=format&fit=crop&w=800&q=80" alt="Portfolio">
+        <div class="content">
+          <h3>Portfolio Website</h3>
+          <p>This fun yet professional website you’re scrolling through right now 👨‍💻.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <p>Let’s connect and create something amazing together ✨</p>
+      <a href="mailto:shadoeplayz112006@gmail.com">Email Me</a>
+      <a href="https://www.linkedin.com/in/daksh-singh-b0b4a0366/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/Depressedshado" target="_blank">GitHub</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Daksh Singh | Built with ❤️, ☕ and curiosity.
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('nav ul');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    // Dark mode toggle
+    const darkBtn = document.querySelector('.toggle-btn');
+    darkBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      darkBtn.textContent = document.body.classList.contains('dark') ? "☀️" : "🌙";
+    });
+
+    // Typing effect
+    const typingElement = document.querySelector('.typing');
+    const roles = [
+      "Student @ Symbiosis Institute of Technology",
+      "Aspiring Software Engineer 💻",
+      "Future Entrepreneur 🚀",
+      "Tech Enthusiast 🎮"
+    ];
+    let roleIndex = 0, charIndex = 0;
+    function typeRole() {
+      if (charIndex < roles[roleIndex].length) {
+        typingElement.textContent += roles[roleIndex][charIndex];
+        charIndex++;
+        setTimeout(typeRole, 100);
+      } else { setTimeout(eraseRole, 2000); }
+    }
+    function eraseRole() {
+      if (charIndex > 0) {
+        typingElement.textContent = roles[roleIndex].substring(0, charIndex-1);
+        charIndex--;
+        setTimeout(eraseRole, 50);
+      } else {
+        roleIndex = (roleIndex+1) % roles.length;
+        setTimeout(typeRole, 500);
+      }
+    }
+    typeRole();
+
+    // Scroll reveal effect
+    const sections = document.querySelectorAll("section");
+    window.addEventListener("scroll", () => {
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) sec.classList.add("show");
+      });
+    });
+  </script>
+</body>
+</html>
